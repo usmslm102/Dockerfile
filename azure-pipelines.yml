@@ -10,8 +10,20 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  imageName: 'dotnetcoreapp:$(build.buildId)'
+  imageName: 'usansa.azurecr.io/dotnetcoremvc:$(build.buildId)'
 
 steps:
-- script: docker build -f NetCoreApp/Dockerfile -t $(imageName) .
-  displayName: 'docker build'
+- task: Docker@0
+  displayName: 'Build an image'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerFile: NetCoreApp/Dockerfile
+    imageName: '$(imageName)'
+
+- task: Docker@1
+  displayName: 'Push an image'
+  inputs:
+    azureSubscriptionEndpoint: '$(AzureSubscription)'
+    azureContainerRegistry: usansa.azurecr.io
+    command: 'Push an image'
+    imageName: 'dotnetcoremvc:$(Build.BuildId)'
