@@ -1,11 +1,13 @@
-FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM microsoft/dotnet:2.2-sdk AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
 WORKDIR /src
+COPY ["NetCoreApp.csproj", ""]
+RUN dotnet restore
 COPY . .
-RUN dotnet restore "NetCoreApp.csproj"
+WORKDIR "/src/"
 RUN dotnet build "NetCoreApp.csproj" -c Release -o /app
 
 FROM build AS publish
