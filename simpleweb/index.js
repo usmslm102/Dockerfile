@@ -4,7 +4,7 @@ const express = require('express')
 const app = express();
 
 app.get('/', (req, res) => {
-    res.send('Bye There');
+    res.send('Hi There');
 })
 
 app.listen(8080, () => {
