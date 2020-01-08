@@ -27,4 +27,4 @@ steps:
     Dockerfile: 'client/Dockerfile.dev'
     tags: '$(Build.BuildId)'
 
-- script: docker run usmslm102/react-app:$(Build.BuildId) npm run test
+- script: docker run usmslm102/react-app:$(Build.BuildId) npm run test -- --coverage
