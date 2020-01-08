@@ -17,13 +17,6 @@ steps:
   displayName: 'Build an image'
   inputs:
     containerregistrytype: 'Container Registry'
-    dockerFile: NetCoreApp/Dockerfile
-    imageName: '$(imageName)'
-
-- task: Docker@1
-  displayName: 'Push an image'
-  inputs:
-    azureSubscriptionEndpoint: '$(AzureSubscription)'
-    azureContainerRegistry: usansa.azurecr.io
-    command: 'Push an image'
-    imageName: 'dotnetcoremvc:$(Build.BuildId)'
+    action: 'Build an image'
+    dockerFile: 'client/Dockerfile.dev'
+    imageName: 'usmslm102/rect-app'
