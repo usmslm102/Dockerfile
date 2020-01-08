@@ -17,6 +17,6 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'Dockerhub_usmslm102'
-    repository: 'react-app'
+    repository: 'usmslm102/react-app'
     command: 'buildAndPush'
     Dockerfile: 'client/Dockerfile.dev'
